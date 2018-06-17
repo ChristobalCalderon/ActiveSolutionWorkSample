@@ -9,7 +9,6 @@ namespace CarRental.Domain.Models
     {
         public int Id { get; set; }
         public string LicensePlate { get; set; }
-        //personal identity number
         public string PersonalIdentityNumber { get; set; }
         public DateTime StartOfRent { get; set; }
         public DateTime EndOfRent { get; set; }
@@ -29,7 +28,7 @@ namespace CarRental.Domain.Models
         {
             double price = 0d;
 
-            int nrOfDays = DateTime.Compare(StartOfRent, EndOfRent);
+            int nrOfDays = (EndOfRent - StartOfRent).Days;
             //If customer returns a car the same day, we still need to charge the customer for a day
             nrOfDays = nrOfDays == 0 ? 1 : nrOfDays;
             int nrOfKm = EndofCurrentMeter - StartOfCurrentMeter;
@@ -37,7 +36,7 @@ namespace CarRental.Domain.Models
             switch (CarCategory)
             {
                 case CarCategory.SmallCar:
-                    price = perDay * perKm;
+                    price = perDay * nrOfDays;
                     break;
                 case CarCategory.Combi:
                     price = perDay * nrOfDays * 1.3 + perKm * nrOfKm;
@@ -45,8 +44,8 @@ namespace CarRental.Domain.Models
                 case CarCategory.Truck:
                     price = perDay * nrOfDays * 1.5 + perKm * nrOfKm * 1.5;
                     break;
-                default:
-                    throw new Exception("Invalid car category and cannot calculate rent price");
+                case CarCategory.InvalidCarCategory:
+                    throw new Exception("Rent::CalculateRentalPrice Invalid car category");
             }
 
             return price;

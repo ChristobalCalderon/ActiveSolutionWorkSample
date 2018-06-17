@@ -62,7 +62,7 @@ namespace CarRental.Domain.Services
         {
             Rent rent = await _rentRepository.GetByIdAsync(id);
 
-            if(rent.StartOfRent > endOfRent)
+            if(DateTime.Compare(rent.StartOfRent, endOfRent) > 0)
             {
                 throw new ArgumentException("RentService::ReturnAsync Invalid date, end date is before start date");
             }

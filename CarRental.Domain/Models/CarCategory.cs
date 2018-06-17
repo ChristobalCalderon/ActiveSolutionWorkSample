@@ -6,8 +6,9 @@ namespace CarRental.Domain.Models
 {
     public enum CarCategory
     {
-        SmallCar,
-        Combi,
-        Truck
+        InvalidCarCategory = 0,
+        SmallCar = 10,
+        Combi = 20,
+        Truck = 30
     }
 }

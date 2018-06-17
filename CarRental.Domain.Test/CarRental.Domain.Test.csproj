@@ -15,9 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="CarRental.Domain">
-      <HintPath>..\CarRental.Domain\bin\Debug\netcoreapp2.0\CarRental.Domain.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\CarRental.Domain\CarRental.Domain.csproj" />
   </ItemGroup>
 
 </Project>
