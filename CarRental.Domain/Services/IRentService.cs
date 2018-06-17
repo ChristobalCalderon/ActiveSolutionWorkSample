@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace CarRental.Domain.Services
 {
-    public interface IRentACarService
+    public interface IRentService
     {
         Task RentACarAsync(string licensePlate, string ssn, DateTime startOfRent, int startOfCurrentMeter);
-        Task ReturnACarAsync(int bookingNr, DateTime endOfRent, int endOfCurrentMeter);
+        Task ReturnACarAsync(int id, DateTime endOfRent, int endOfCurrentMeter);
     }
 }

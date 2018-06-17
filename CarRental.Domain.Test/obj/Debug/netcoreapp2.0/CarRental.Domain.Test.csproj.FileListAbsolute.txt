@@ -12,3 +12,6 @@ C:\Users\chrcal\source\repos\CarRental.Domain\CarRental.Domain.Test\bin\Debug\ne
 C:\Users\chrcal\source\repos\CarRental.Domain\CarRental.Domain.Test\bin\Debug\netcoreapp2.0\CarRental.Domain.Test.pdb
 C:\Users\chrcal\source\repos\CarRental.Domain\CarRental.Domain.Test\obj\Debug\netcoreapp2.0\CarRental.Domain.Test.dll
 C:\Users\chrcal\source\repos\CarRental.Domain\CarRental.Domain.Test\obj\Debug\netcoreapp2.0\CarRental.Domain.Test.pdb
+C:\Users\chrcal\source\repos\CarRental.Domain\CarRental.Domain.Test\bin\Debug\netcoreapp2.0\CarRental.Domain.dll
+C:\Users\chrcal\source\repos\CarRental.Domain\CarRental.Domain.Test\bin\Debug\netcoreapp2.0\CarRental.Domain.pdb
+C:\Users\chrcal\source\repos\CarRental.Domain\CarRental.Domain.Test\obj\Debug\netcoreapp2.0\CarRental.Domain.Test.csproj.CopyComplete

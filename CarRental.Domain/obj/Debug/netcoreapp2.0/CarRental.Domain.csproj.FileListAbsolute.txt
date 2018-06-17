@@ -15,3 +15,4 @@ C:\Users\chrcal\source\repos\CarRental.Domain\CarRental.Domain\obj\Debug\netcore
 C:\Users\chrcal\source\repos\CarRental.Domain\CarRental.Domain\obj\Debug\netcoreapp2.0\CarRental.Domain.AssemblyInfo.cs
 C:\Users\chrcal\source\repos\CarRental.Domain\CarRental.Domain\obj\Debug\netcoreapp2.0\CarRental.Domain.dll
 C:\Users\chrcal\source\repos\CarRental.Domain\CarRental.Domain\obj\Debug\netcoreapp2.0\CarRental.Domain.pdb
+C:\Users\chrcal\source\repos\CarRental.Domain\CarRental.Domain\obj\Debug\netcoreapp2.0\CarRental.Domain.csprojResolveAssemblyReference.cache

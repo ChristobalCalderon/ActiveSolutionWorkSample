@@ -8,8 +8,6 @@ namespace CarRental.Domain.Models
     public class Rent
     {
         public int Id { get; set; }
-        public int NrOfDays { get { return DateTime.Compare(StartOfRent, EndOfRent); } }
-        public int NrOfKm { get { return EndofCurrentMeter - StartOfCurrentMeter; } }
         public string LicensePlate { get; set; }
         public string SSN { get; set; }
         public DateTime StartOfRent { get; set; }
