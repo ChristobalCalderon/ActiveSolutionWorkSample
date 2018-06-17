@@ -9,6 +9,7 @@ namespace CarRental.Domain.Models
     {
         public int Id { get; set; }
         public string LicensePlate { get; set; }
+        //personal identity number
         public string PersonalIdentityNumber { get; set; }
         public DateTime StartOfRent { get; set; }
         public DateTime EndOfRent { get; set; }
@@ -18,7 +19,7 @@ namespace CarRental.Domain.Models
         public double Price { get; set; }
 
         /// <summary>
-        /// Default value is used for small cars and new categories 
+        /// Calculates the price of the rent based on what category the car belongs to
         /// </summary>
         /// <param name="rent"></param>
         /// <param name="perDay"></param>
@@ -35,15 +36,17 @@ namespace CarRental.Domain.Models
 
             switch (CarCategory)
             {
-                case Models.CarCategory.Combi:
+                case CarCategory.SmallCar:
+                    price = perDay * perKm;
+                    break;
+                case CarCategory.Combi:
                     price = perDay * nrOfDays * 1.3 + perKm * nrOfKm;
                     break;
-                case Models.CarCategory.Truck:
+                case CarCategory.Truck:
                     price = perDay * nrOfDays * 1.5 + perKm * nrOfKm * 1.5;
                     break;
                 default:
-                    price = perDay * perKm;
-                    break;
+                    throw new Exception("Invalid car category and cannot calculate rent price");
             }
 
             return price;
