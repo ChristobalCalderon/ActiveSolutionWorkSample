@@ -6,7 +6,7 @@ namespace CarRental.Domain.Services
 {
     public interface IRentService
     {
-        Task RentACarAsync(string licensePlate, string ssn, DateTime startOfRent, int startOfCurrentMeter);
-        Task ReturnACarAsync(int id, DateTime endOfRent, int endOfCurrentMeter);
+        Task<int> RentAsync(string licensePlate, string ssn, DateTime startOfRent, int startOfCurrentMeter);
+        Task<Rent> ReturnAsync(int id, DateTime endOfRent, int endOfCurrentMeter);
     }
 }

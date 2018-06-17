@@ -9,39 +9,27 @@ using Xunit;
 
 namespace CarRental.Domain.Test.Rent
 {
-    public class RentTest
+    public class RentTest : IClassFixture<ServiceFixture>
     {
         private readonly IRentService _rentService;
 
-        public RentTest()
+        public RentTest(ServiceFixture serviceFixture)
         {
-            var rentRepository = new Mock<IRentRepository>();
-            var priceRepository = new Mock<IPriceRepository>();
-            rentRepository.Setup(x => x.AddAsync(new Models.Rent() {
-                Id = 1,
-                SSN = "871121-0057",
-                StartOfRent = DateTime.Parse("2018-06-17"),
-                LicensePlate = "MBLC298",
-                StartOfCurrentMeter = 0,
-                CarCategory = CarCategory.SmallCar
-            }));
-            _rentService = new RentService(rentRepository.Object, priceRepository.Object);
+            _rentService = serviceFixture.Init();
         }
 
         [Fact]
-        public async Task Rent_A_CarAsync_Success()
+        public async Task RentCar_NewRental__Then_Success()
         {
-            var result = _rentService.RentACarAsync("DMK129","8711210057",DateTime.Parse("2018-06-17"),0);
+            int bookingNumber = await _rentService.RentAsync("MBLC298", "871121-0057", DateTime.Parse("2018-06-17"), 0);
 
-            await result;
-
-            Assert.True(result.IsCompleted);
+            Assert.True(bookingNumber > 0);
         }
 
         [Fact]
-        public async Task Rent_A_CarAsync_Invalid_SSN()
+        public async Task RentCar_InvalidPIN__Then_ThrowException()
         {
-            await Assert.ThrowsAsync<ArgumentException>(async () => await _rentService.RentACarAsync("DMK129", "831018-0367", DateTime.Parse("2018-06-16"), 0));
+            await Assert.ThrowsAsync<ArgumentException>(async () => await _rentService.RentAsync("DMK129", "831018-0367", DateTime.Parse("2018-06-16"), 0));
         }
 
         //[Fact]
@@ -54,4 +42,4 @@ namespace CarRental.Domain.Test.Rent
         //    Assert.True(result.IsCompleted);
         //}
     }
-    }
+}

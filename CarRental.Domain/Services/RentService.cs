@@ -1,5 +1,4 @@
-﻿using CarRental.Domain.ExtensionMethods;
-using CarRental.Domain.Models;
+﻿using CarRental.Domain.Models;
 using CarRental.Domain.Repositories;
 using System;
 using System.Text.RegularExpressions;
@@ -22,49 +21,55 @@ namespace CarRental.Domain.Services
         }
 
         /// <summary>
-        //  Function takes the license plat that is a unique identifier of the car
-        //  the Social Security Number of a person
-        //  the day they rent the car
-        //  and the current meter on the car when the customer receives the car
+        ///  Function takes the license plat that is a unique identifier of the car
+        ///  the Social Security Number of a person
+        ///  the day they rent the car
+        ///  and the current meter on the car when the customer receives the car
         /// </summary>
         /// <param name="licensePlate"></param>
-        /// <param name="ssn"></param>
+        /// <param name="pin">Personal identity number</param>
         /// <param name="startOfRent"></param>
         /// <param name="currentMeter"></param>
-        /// <returns></returns>
-        public async Task RentACarAsync(string licensePlate, string ssn, DateTime startOfRent, int currentMeter)
+        /// <returns>Booking number</returns>
+        public async Task<int> RentAsync(string licensePlate, string pin, DateTime startOfRent, int currentMeter)
         {
             var rx = new Regex(@"\b(((20)((0[0-9])|(1[0-1])))|(([1][^0-8])?\d{2}))((0[1-9])|1[0-2])((0[1-9])|(2[0-9])|(3[01]))[-+]?\d{4}[,.]?\b");
-            if(!rx.IsMatch(ssn))
+            if(!rx.IsMatch(pin))
             {
-                throw new ArgumentException($"RentService::RentACarAsync Invalid SSN : {ssn}");
+                throw new ArgumentException($"RentService::RentACarAsync Invalid SSN : {pin}");
             }
 
             Rent rent = new Rent {
                 LicensePlate = licensePlate,
-                SSN = ssn,
+                PIN = pin,
                 StartOfRent = startOfRent,
                 StartOfCurrentMeter = currentMeter
             };
-            await _rentRepository.AddAsync(rent);
+
+            return await _rentRepository.AddAsync(rent);
         }
         
         /// <summary>
-        /// Function takes the rental/booking number
+        /// Function takes the rental/booking number,
         /// day the customer returns the car
         /// and what the meter stands on when returning the car
         /// </summary>
         /// <param name="id"></param>
         /// <param name="endOfRent"></param>
         /// <param name="endOfCurrentMeter"></param>
-        /// <returns></returns>
-        public async Task ReturnACarAsync(int id, DateTime endOfRent, int endOfCurrentMeter)
+        /// <returns>The rent object</returns>
+        public async Task<Rent> ReturnAsync(int id, DateTime endOfRent, int endOfCurrentMeter)
         {
             Rent rent = await _rentRepository.GetByIdAsync(id);
 
             if(rent.StartOfRent > endOfRent)
             {
-                throw new ArgumentOutOfRangeException("RentService::ReturnACarAsync Invalid date, end date is before start date");
+                throw new ArgumentOutOfRangeException("RentService::ReturnAsync Invalid date, end date is before start date");
+            }
+
+            if (rent.StartOfCurrentMeter > endOfCurrentMeter)
+            {
+                throw new ArgumentOutOfRangeException("RentService::ReturnAsync Current meter is below starting meter");
             }
 
             rent.EndOfRent = endOfRent;
@@ -72,6 +77,7 @@ namespace CarRental.Domain.Services
             Price price = await _priceRepository.GetPriceByCategory(rent.CarCategory);
             rent.Price = rent.CalculateRentalPrice(price.PerDay, price.PerKm);
             await _rentRepository.UpdateAsync(rent);
+            return rent; 
         }
     }
 }
