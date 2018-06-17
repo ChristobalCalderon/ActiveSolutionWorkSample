@@ -15,7 +15,7 @@ namespace CarRental.Domain.Test
             var priceRepository = new Mock<IPriceRepository>();
 
             priceRepository.Setup(x=> 
-            x.GetPriceByCategory(CarCategory.SmallCar
+            x.GetPriceByCarCategory(CarCategory.SmallCar
             )).Returns(Task.FromResult(new Price
             {
                 PerDay = 100,
@@ -24,7 +24,7 @@ namespace CarRental.Domain.Test
             }));
 
             priceRepository.Setup(x =>
-            x.GetPriceByCategory(CarCategory.Combi
+            x.GetPriceByCarCategory(CarCategory.Combi
             )).Returns(Task.FromResult(new Price
             {
                 PerDay = 200,
@@ -33,7 +33,7 @@ namespace CarRental.Domain.Test
             }));
 
             priceRepository.Setup(x =>
-            x.GetPriceByCategory(CarCategory.Truck
+            x.GetPriceByCarCategory(CarCategory.Truck
             )).Returns(Task.FromResult(new Price
             {
                 PerDay = 300,
@@ -49,7 +49,7 @@ namespace CarRental.Domain.Test
             {
                 Id = 1,
                 CarCategory = CarCategory.SmallCar,
-                PIN = "871121-0057",
+                PersonalIdentityNumber = "871121-0057",
                 StartOfRent = DateTime.Parse("2018-06-18"),
                 LicensePlate = "MBLC298",
                 StartOfCurrentMeter = 100,
@@ -60,7 +60,7 @@ namespace CarRental.Domain.Test
             {
                 Id = 2,
                 CarCategory = CarCategory.Combi,
-                PIN = "871121-0057",
+                PersonalIdentityNumber = "871121-0057",
                 StartOfRent = DateTime.Parse("2018-06-18"),
                 LicensePlate = "MBLC2999",
                 StartOfCurrentMeter = 100,
@@ -71,7 +71,7 @@ namespace CarRental.Domain.Test
             {
                 Id = 3,
                 CarCategory = CarCategory.Truck,
-                PIN = "871121-0057",
+                PersonalIdentityNumber = "871121-0057",
                 StartOfRent = DateTime.Parse("2018-06-18"),
                 LicensePlate = "MBLC288",
                 StartOfCurrentMeter = 100,
@@ -81,7 +81,7 @@ namespace CarRental.Domain.Test
             x.UpdateAsync(new Models.Rent()
             {
                 Id = 1,
-                PIN = "871121-0057",
+                PersonalIdentityNumber = "871121-0057",
                 StartOfRent = DateTime.Parse("2018-06-17"),
                 LicensePlate = "MBLC298",
                 StartOfCurrentMeter = 100,
@@ -94,7 +94,7 @@ namespace CarRental.Domain.Test
             x.UpdateAsync(new Models.Rent()
             {
                 Id = 2,
-                PIN = "871121-0057",
+                PersonalIdentityNumber = "871121-0057",
                 StartOfRent = DateTime.Parse("2018-06-17"),
                 LicensePlate = "MBLC299",
                 StartOfCurrentMeter = 100,
@@ -107,7 +107,7 @@ namespace CarRental.Domain.Test
             x.UpdateAsync(new Models.Rent()
             {
                 Id = 3,
-                PIN = "871121-0057",
+                PersonalIdentityNumber = "871121-0057",
                 StartOfRent = DateTime.Parse("2018-06-17"),
                 LicensePlate = "MBLC288",
                 StartOfCurrentMeter = 100,

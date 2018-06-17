@@ -9,8 +9,7 @@ namespace CarRental.Domain.Models
     {
         public int Id { get; set; }
         public string LicensePlate { get; set; }
-        //personal identity number
-        public string PIN { get; set; }
+        public string PersonalIdentityNumber { get; set; }
         public DateTime StartOfRent { get; set; }
         public DateTime EndOfRent { get; set; }
         public int StartOfCurrentMeter { get; set; }

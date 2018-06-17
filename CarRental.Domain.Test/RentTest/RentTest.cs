@@ -24,7 +24,7 @@ namespace CarRental.Domain.Test.RentTest
         }
 
         [Fact]
-        public async Task RentCar_InvalidPIN__Then_ThrowException()
+        public async Task RentCar_InvalidPersonalIdentityNumber__Then_ThrowException()
         {
             await Assert.ThrowsAsync<ArgumentException>(async () => await _rentService.RentAsync("DMK129", "831018-0367", DateTime.Parse("2018-06-16"), 0));
         }

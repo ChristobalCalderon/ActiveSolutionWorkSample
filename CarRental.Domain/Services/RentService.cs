@@ -22,26 +22,26 @@ namespace CarRental.Domain.Services
 
         /// <summary>
         ///  Function takes the license plat that is a unique identifier of the car
-        ///  the Social Security Number of a person
+        ///  the personal identity number of a person
         ///  the day they rent the car
         ///  and the current meter on the car when the customer receives the car
         /// </summary>
         /// <param name="licensePlate"></param>
-        /// <param name="pin">Personal identity number</param>
+        /// <param name="personalIdentityNumber">Personal identity number</param>
         /// <param name="startOfRent"></param>
         /// <param name="currentMeter"></param>
         /// <returns>Booking number</returns>
-        public async Task<int> RentAsync(string licensePlate, string pin, DateTime startOfRent, int currentMeter)
+        public async Task<int> RentAsync(string licensePlate, string personalIdentityNumber, DateTime startOfRent, int currentMeter)
         {
             var rx = new Regex(@"\b(((20)((0[0-9])|(1[0-1])))|(([1][^0-8])?\d{2}))((0[1-9])|1[0-2])((0[1-9])|(2[0-9])|(3[01]))[-+]?\d{4}[,.]?\b");
-            if(!rx.IsMatch(pin))
+            if(!rx.IsMatch(personalIdentityNumber))
             {
-                throw new ArgumentException($"RentService::RentACarAsync Invalid SSN : {pin}");
+                throw new ArgumentException($"RentService::RentACarAsync Invalid SSN : {personalIdentityNumber}");
             }
 
             Rent rent = new Rent {
                 LicensePlate = licensePlate,
-                PIN = pin,
+                PersonalIdentityNumber = personalIdentityNumber,
                 StartOfRent = startOfRent,
                 StartOfCurrentMeter = currentMeter
             };
@@ -51,7 +51,7 @@ namespace CarRental.Domain.Services
         
         /// <summary>
         /// Function takes the rental/booking number,
-        /// day the customer returns the car
+        /// day the car returns
         /// and what the meter stands on when returning the car
         /// </summary>
         /// <param name="id"></param>
@@ -74,7 +74,7 @@ namespace CarRental.Domain.Services
 
             rent.EndOfRent = endOfRent;
             rent.EndofCurrentMeter = endOfCurrentMeter;
-            Price price = await _priceRepository.GetPriceByCategory(rent.CarCategory);
+            Price price = await _priceRepository.GetPriceByCarCategory(rent.CarCategory);
             rent.Price = rent.CalculateRentalPrice(price.PerDay, price.PerKm);
             await _rentRepository.UpdateAsync(rent);
             return rent; 

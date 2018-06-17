@@ -8,6 +8,6 @@ namespace CarRental.Domain.Repositories
 {
     public interface IPriceRepository : IRepository<Price>
     {
-        Task<Price> GetPriceByCategory(CarCategory carCategory); 
+        Task<Price> GetPriceByCarCategory(CarCategory carCategory); 
     }
 }
