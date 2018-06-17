@@ -64,12 +64,12 @@ namespace CarRental.Domain.Services
 
             if(rent.StartOfRent > endOfRent)
             {
-                throw new ArgumentOutOfRangeException("RentService::ReturnAsync Invalid date, end date is before start date");
+                throw new ArgumentException("RentService::ReturnAsync Invalid date, end date is before start date");
             }
 
             if (rent.StartOfCurrentMeter > endOfCurrentMeter)
             {
-                throw new ArgumentOutOfRangeException("RentService::ReturnAsync Current meter is below starting meter");
+                throw new ArgumentException("RentService::ReturnAsync Current meter is below starting meter");
             }
 
             rent.EndOfRent = endOfRent;
