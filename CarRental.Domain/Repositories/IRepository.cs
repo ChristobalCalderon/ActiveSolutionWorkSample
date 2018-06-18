@@ -10,7 +10,7 @@ namespace CarRental.Domain.Repositories
     {
         Task<int> AddAsync(T entity);
         Task DeleteAsync(int id);
-        Task<IQueryable<T>> GetAll();
+        Task<IEnumerable<T>> GetAll();
         Task<T> GetByIdAsync(int id);
         Task UpdateAsync(T entity);
     }

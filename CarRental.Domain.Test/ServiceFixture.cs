@@ -15,7 +15,7 @@ namespace CarRental.Domain.Test
             var priceRepository = new Mock<IPriceRepository>();
 
             priceRepository.Setup(x=> 
-            x.GetPriceByCarCategory(CarCategory.SmallCar
+            x.GetPriceByCarCategoryAsync(CarCategory.SmallCar
             )).Returns(Task.FromResult(new Price
             {
                 PerDay = 100,
@@ -24,7 +24,7 @@ namespace CarRental.Domain.Test
             }));
 
             priceRepository.Setup(x =>
-            x.GetPriceByCarCategory(CarCategory.Combi
+            x.GetPriceByCarCategoryAsync(CarCategory.Combi
             )).Returns(Task.FromResult(new Price
             {
                 PerDay = 200,
@@ -33,7 +33,7 @@ namespace CarRental.Domain.Test
             }));
 
             priceRepository.Setup(x =>
-            x.GetPriceByCarCategory(CarCategory.Truck
+            x.GetPriceByCarCategoryAsync(CarCategory.Truck
             )).Returns(Task.FromResult(new Price
             {
                 PerDay = 300,

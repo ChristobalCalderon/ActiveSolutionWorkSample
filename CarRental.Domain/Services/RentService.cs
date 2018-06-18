@@ -74,7 +74,7 @@ namespace CarRental.Domain.Services
 
             rent.EndOfRent = endOfRent;
             rent.EndofCurrentMeter = endOfCurrentMeter;
-            Price price = await _priceRepository.GetPriceByCarCategory(rent.CarCategory);
+            Price price = await _priceRepository.GetPriceByCarCategoryAsync(rent.CarCategory);
             rent.Price = rent.CalculateRentalPrice(price.PerDay, price.PerKm);
             await _rentRepository.UpdateAsync(rent);
             return rent; 

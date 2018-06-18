@@ -66,7 +66,7 @@ namespace CarRental.Domain.Test.RentTest
                LicensePlate = "MBLC298"
             };
 
-            Assert.Throws<Exception>(() => rent.CalculateRentalPrice(200,200));
+            Assert.Throws<Exception>(() => rent.CalculateRentalPrice(200,3));
         }
 
         [Fact]
